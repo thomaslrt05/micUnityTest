@@ -6,8 +6,8 @@ namespace Assets.Scripts
     public class PlayerInteraction : MonoBehaviour
     {
         public float playerReach = 3f;
-        Interactable currentInteractable;
-        private int value = 0;
+        ObjectInteractable currentInteractable;
+        
 
         private void Update()
         {
@@ -28,28 +28,10 @@ namespace Assets.Scripts
              {
                 if(hit.collider.tag == "Interactable")
                 {
-                    ObjectInteractable interactableObject = hit.collider.gameObject.GetComponent<ObjectInteractable>();
-                    if (interactableObject != null)
-                    {
-                        interactableObject.IncrementeValue();
-                    }
+                    currentInteractable = hit.collider.GetComponent<ObjectInteractable>();                            
                 }
              }
         }
 
-        void SetNewCurrentInteractable(Interactable newInterrac)
-        {
-            currentInteractable = newInterrac;
-            currentInteractable.EnableOutline();
-        }
-
-        void DisableCurrentInteractable()
-        {
-            if(currentInteractable)
-            {
-                currentInteractable.DisableOutline();
-                currentInteractable = null;
-            }
-        }
     }
 }

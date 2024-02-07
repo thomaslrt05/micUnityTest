@@ -1,28 +1,39 @@
 ﻿using UnityEditor;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+using UnityEngine.Events;
 
 namespace Assets.Scripts
 {
     public class ObjectInteractable : MonoBehaviour
     {
         private int value;
-        public TextMeshProUGUI valueText;
+        Outline outline;
+        public string message;
 
-        private void Start()
+
+        public UnityEvent onInteraction;
+
+        void Start()
         {
             value = 0;
+            outline = GetComponent<Outline>();
+            outline.enabled = false;
         }
+
+        public void Interact()
+        {
+            IncrementeValue();
+            HUDController.instance.UpdateText(value);
+        }
+
 
         public void IncrementeValue()
         {
             value++;
-            UpdateText();
         }
 
-        public void UpdateText()
-        {
-            valueText.text = "Vous avez cliquez " + value.ToString();
-        }
+  
     }
 }
